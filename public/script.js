@@ -8,18 +8,19 @@ var peer = new Peer(undefined, {
 
 const user = prompt("Enter your name");
 
-var myvideo = document.createElement("video")
-myvideo.muted=true
+const myVideo = document.createElement("video")
+myVideo.muted=true
 
-var mystream
-navigator.mediaDevices.getUserMedia(({audio:true, video:true})).then((stream)=>{
-mystream = stream
+var myStream
+navigator.mediaDevices.getUserMedia({audio:true, video:true}).then((stream)=>{
+myStream = stream
+addVideoStream(myVideo, stream)
 })
 
 function addVideoStream(video, stream){
 
     video.srcObject = stream
-    video.addEventListener("loadedMetaData",()=>{
+    video.addEventListener("loadedmetadata",()=>{
         video.play()
         $("#video_grid").append(video)
     })
